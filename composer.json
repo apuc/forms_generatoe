@@ -1,0 +1,17 @@
+{
+    "name": "kavalar/forms",
+    "description": "Form generator",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "kavalar\\forms\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kavalar",
+            "email": "apuc06@mail.ru"
+        }
+    ],
+    "require": {}
+}
