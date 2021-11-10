@@ -13,5 +13,6 @@ $label = new Label();
 
 echo $label->create('new ', ['for' => 'firstField']);
 echo '<br>';
+echo '<br>';
 
 echo $input->create('', ['name' => 'my_name', 'id' => 'firstField', 'placeholder' => 'myb placeholder']);
