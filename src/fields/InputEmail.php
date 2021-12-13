@@ -5,7 +5,7 @@ namespace kavalar\forms\fields;
 use kavalar\forms\interfaces\FieldInterface;
 use kavalar\forms\traits\OptionLoaderTrait;
 
-class InputText implements FieldInterface
+class InputEmail implements FieldInterface
 {
     use OptionLoaderTrait;
 
@@ -13,7 +13,7 @@ class InputText implements FieldInterface
     {
         $attrs = $this->loadAttributes($options);
         $value = $this->getAttr('value');
-        return "<input type='text' value='$value' $attrs>";
+        return "<input type='email' value='$value' $attrs>";
     }
 
 }

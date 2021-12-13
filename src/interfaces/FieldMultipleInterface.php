@@ -5,6 +5,6 @@ namespace kavalar\forms\interfaces;
 interface FieldMultipleInterface
 {
 
-    public function create($value, array $data, array $options);
+    public function create($name, $value, array $data, array $options);
 
 }

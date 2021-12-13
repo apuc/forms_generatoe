@@ -7,17 +7,12 @@ use kavalar\forms\Form;
 
 require_once 'vendor/autoload.php';
 
+$form = new Form('/user/create');
 
-$form = new Form();
-$input = new InputText();
-$label = new Label();
-$select = new Select();
+$form->start();
 
-echo $label->create('new ', ['for' => 'firstField']);
-echo '<br>';
+$form->create('text', 'phone', ['class' => 'form-control', 'id' => 'valid-phone']);
+$form->create('email', 'user_email', ['value' => 'qwe@mail.ru', 'class' => 'form-control']);
+$form->create('select', 'city', ['data' => ['Донецк', 'Макеевка'], 'value' => 0, 'class' => 'form-control']);
 
-
-echo $input->create('', ['name' => 'my_name', 'id' => 'firstField', 'placeholder' => 'myb placeholder']);
-echo '<br>';
-echo '<br>';
-echo $select->create('', ['apple' => 'Яблоко', 'orange' => 'Апельсин'], ['name' => 'selectFruit']);
+$form->end();
