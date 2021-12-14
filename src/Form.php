@@ -5,11 +5,18 @@ namespace kavalar\forms;
 use kavalar\forms\fields\InputEmail;
 use kavalar\forms\fields\InputText;
 use kavalar\forms\fields\Select;
+use kavalar\forms\interfaces\FieldInterface;
 
 class Form
 {
     public $action;
     private $html = '';
+
+    private $pool = [];
+
+    /**
+     * @var FieldInterface
+     */
     private $currentField;
 
     public function __construct($action = '')
@@ -35,24 +42,32 @@ class Form
         }
 
         if (isset($input)) {
-            $this->html .= $input->create($name, $options);
+            $this->currentField = $input->create($name, $options);
+            $this->pool[] = $this->currentField;
         }
 
         return $this;
     }
 
-    public function setValue($value)
+    public function value($value)
     {
+        $this->currentField->setValue($value);
 
+        return $this;
     }
 
-    public function label()
+    public function label($label)
     {
+        $this->currentField->setLabel($label);
+
         return $this;
     }
 
     public function end()
     {
+        foreach ($this->pool as $item){
+            $this->html .= $item->render();
+        }
         $this->html .= '</form>';
         echo $this->html;
     }

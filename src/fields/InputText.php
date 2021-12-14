@@ -9,11 +9,35 @@ class InputText implements FieldInterface
 {
     use OptionLoaderTrait;
 
+    private $attrsList;
+    private $value;
+    private $label = false;
+    private $name;
+
     public function create($name, array $options)
     {
-        $attrs = $this->loadAttributes($options);
-        $value = $this->getAttr('value');
-        return "<input type='text' value='$value' $attrs>";
+        $this->attrsList = $this->loadAttributes($options);
+        $this->name = $name;
+        $this->value = $this->getAttr('value');
+        return $this;
     }
 
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function render()
+    {
+        $label = '';
+        if ($this->label){
+            $label = "<label>$this->label</label>";
+        }
+        return $label . "<input name='$this->name' type='text' value='$this->value' $this->attrsList>";
+    }
 }

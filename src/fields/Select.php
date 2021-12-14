@@ -10,16 +10,38 @@ class Select implements FieldInterface
 {
     use OptionLoaderTrait;
 
+    private $attrsList;
+    private $value;
+    private $label = false;
+    private $name;
+
     public function create($name, array $options)
     {
-        $attrs = $this->loadAttributes($options);
-        $html = "<select name='$name' $attrs>";
+        $this->attrsList = $this->loadAttributes($options);
+        $this->name = $name;
+        $this->value = $this->getAttr('value');
 
-        $i = 0;
-        $value = $this->getAttr('value');
+        return $this;
+    }
+
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+
+    public function render()
+    {
+        $html = "<select name='$this->name' $this->attrsList>";
         $data = $this->getAttr('data');
+
+        $i=0;
         foreach ((array)$data as $key => $datum){
-            $selected = $value === $i ? 'selected' : '';
+            $selected = $this->value === $i ? 'selected' : '';
             $html .= "<option $selected value='$key'>$datum</option>";
             $i++;
         }
